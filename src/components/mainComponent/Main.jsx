@@ -18,10 +18,10 @@ export function Main() {
     }
 
     const handleAdd = () => {
-        setMessages([...messages, {
+        setMessages([{
             message: 'lorem ipsum text here',
-            timeSent: 'Jul 12, 1:12 PM'
-        }])
+            timeSent: new Date().toLocaleString()
+        }, ...messages])
     }
 
     const expandedCSS = expanded ? 'bottom-4 right-4 fixed bg-white w-24 h-24 rounded-full border-2' : 'w-[400px] h-[500px] bottom-4 right-4 fixed bg-white border-2 rounded-md bg-gray-200'
