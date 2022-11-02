@@ -21,6 +21,7 @@ export function Main() {
             <Landing />
             <About />
             <div className={expandedCSS}>
+
                 {/* TOGGLE EXPAND BUTTON --- START */}
                 {expanded ? 
                     <button onClick={handleToggle} className='w-full h-full  grid place-items-center'>
@@ -32,6 +33,8 @@ export function Main() {
                     </button>
                 }
                 {/* TOGGLE EXPAND BUTTON --- END */}
+
+                {/* EXPANDED OR NOT EXPANDED --- START */}
                 {!expanded ? 
                 <section className="px-2 py-2 h-[90%]">
                     <h2 className="text-center text-lg font-semibold">Welcome to the Chat Bot</h2>
@@ -47,6 +50,9 @@ export function Main() {
                 :
                 null
                 }
+                {/* EXPANDED OR NOT EXPANDED --- END */}
+
+
             </div>
         </div>
     );
