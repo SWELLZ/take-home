@@ -8,9 +8,20 @@ import close from '../resources/close.png'
 
 export function Main() {
     const [expanded, setExpanded] = useState(false);
+    const [messages, setMessages] = useState([{
+            message: 'lorem ipsum text here',
+            timeSent: 'Jul 12, 1:12 PM'
+        }])
 
     const handleToggle = () => {
         setExpanded(!expanded)
+    }
+
+    const handleAdd = () => {
+        setMessages([...messages, {
+            message: 'lorem ipsum text here',
+            timeSent: 'Jul 12, 1:12 PM'
+        }])
     }
 
     const expandedCSS = expanded ? 'bottom-4 right-4 fixed bg-white w-24 h-24 rounded-full border-2' : 'w-[400px] h-[500px] bottom-4 right-4 fixed bg-white border-2 rounded-md bg-gray-200'
@@ -39,14 +50,16 @@ export function Main() {
                 <section className="px-2 py-2 h-[90%]">
                     <h2 className="text-center text-lg font-semibold">Welcome to the Chat Bot</h2>
 
-                    <div className="bg-white mt-4 h-[93%] w-full flex flex-col-reverse">
+                    <div className="bg-white mt-4 h-[93%] w-full flex flex-col-reverse overflow-y-scroll">
                         {/* EACH MESSAGE */}
-                        <div className="px-2 py-2">
-                            <div className="bg-gray-300 w-fit h-fit px-4 py-2 rounded-md ml-2 mb-2">
-                                <p>asdf</p>
+                        {messages.map(message => (
+                            <div className="px-2 py-2">
+                                <div className="bg-gray-300 w-fit h-fit px-4 py-2 rounded-md ml-2 mb-2">
+                                    <p>{message.message}</p>
+                                </div>
+                                <p className="text-xs text-gray-500">{message.timeSent}</p>
                             </div>
-                            <p className="text-xs text-gray-500">Thu 12, 1:47 PM</p>
-                        </div>
+                        ))}
                     </div>
 
                 </section>
@@ -54,6 +67,10 @@ export function Main() {
                 null
                 }
                 {/* EXPANDED CONTENT --- END */}
+
+                <button onClick={handleAdd}>
+                    Temp Add Button
+                </button>
 
 
             </div>
