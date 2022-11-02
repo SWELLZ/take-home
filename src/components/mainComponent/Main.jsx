@@ -34,15 +34,18 @@ export function Main() {
                 }
                 {/* TOGGLE EXPAND BUTTON --- END */}
 
-                {/* EXPANDED OR NOT EXPANDED --- START */}
+                {/* EXPANDED CONTENT --- START */}
                 {!expanded ? 
                 <section className="px-2 py-2 h-[90%]">
                     <h2 className="text-center text-lg font-semibold">Welcome to the Chat Bot</h2>
 
                     <div className="bg-white mt-4 h-[93%] w-full flex flex-col-reverse">
                         {/* EACH MESSAGE */}
-                        <div className="bg-gray-300 w-fit h-fit px-4 py-2 rounded-md ml-2 mb-2">
-                            <p>asdf</p>
+                        <div className="px-2 py-2">
+                            <div className="bg-gray-300 w-fit h-fit px-4 py-2 rounded-md ml-2 mb-2">
+                                <p>asdf</p>
+                            </div>
+                            <p className="text-xs text-gray-500">Thu 12, 1:47 PM</p>
                         </div>
                     </div>
 
@@ -50,7 +53,7 @@ export function Main() {
                 :
                 null
                 }
-                {/* EXPANDED OR NOT EXPANDED --- END */}
+                {/* EXPANDED CONTENT --- END */}
 
 
             </div>
