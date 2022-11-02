@@ -33,12 +33,12 @@ export function Main() {
                 }
                 {/* TOGGLE EXPAND BUTTON --- END */}
                 {!expanded ? 
-                <section className="px-2 py-2 h-full">
+                <section className="px-2 py-2 h-[90%]">
                     <h2 className="text-center text-lg font-semibold">Welcome to the Chat Bot</h2>
 
-                    <div className="bg-white mt-4 h-4/5 w-full flex flex-col-reverse">
+                    <div className="bg-white mt-4 h-[93%] w-full flex flex-col-reverse">
                         {/* EACH MESSAGE */}
-                        <div>
+                        <div className="bg-gray-300 w-fit h-fit px-4 py-2 rounded-md ml-2 mb-2">
                             <p>asdf</p>
                         </div>
                     </div>
