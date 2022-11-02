@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { About } from '../aboutComponent/About';
 import { Landing } from '../landingComponents/Landing';
 import { Nav } from '../navComponent/Nav';
 import message from '../resources/message-icon.png';
 import close from '../resources/close.png';
 import bot from '../resources/ai.png'
+import ChatApi from '../../chat-api'
 
 
 export function Main() {
+    const chatApi = new ChatApi();
+    console.log(chatApi)
+
     const [expanded, setExpanded] = useState(false);
     const [messages, setMessages] = useState([{
             message: 'lorem ipsum text here',
@@ -17,6 +21,10 @@ export function Main() {
     const handleToggle = () => {
         setExpanded(!expanded)
     }
+
+    useEffect(() => {
+        setMessages(chatApi.pendingMessages.map((item) => ({...item, timeSent: new Date().toLocaleString()})))
+    }, [])
 
     const handleAdd = () => {
         setMessages([{
@@ -41,7 +49,7 @@ export function Main() {
                     </button>
                     :
                     <button onClick={handleToggle} className='mt-2 ml-2 w-4 h-4'>
-                        <img className="w-full" src={close} />
+                        <img className="w-full" src={close} alt='close chat box' />
                     </button>
                 }
                 {/* TOGGLE EXPAND BUTTON --- END */}
@@ -60,9 +68,10 @@ export function Main() {
                                         src={bot}
                                         className='w-8 bg-gray-200 rounded-full p-[3px]'
                                         alt='bot profile'
+                                        loading="lazy"
                                     />
                                     <div className="bg-gray-300 w-fit h-fit px-4 py-2 rounded-md ml-2">
-                                        <p>{message.message}</p>
+                                        <p>{message.text}</p>
                                     </div>
                                 </div>
                                 <p className="text-xs text-gray-500">{message.timeSent}</p>
@@ -70,8 +79,8 @@ export function Main() {
                         ))}
                     </div>
                     <button onClick={handleAdd}>
-                    Temp Add Button
-                </button>
+                        Temp Add Button
+                    </button>
                 </section>
                 :
                 null
