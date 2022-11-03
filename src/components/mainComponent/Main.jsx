@@ -1,3 +1,5 @@
+import { Typing } from '../messageComponents/typing';
+import { Message } from '../messageComponents/message';
 import React, { useEffect, useState } from "react";
 import { About } from '../aboutComponent/About';
 import { Landing } from '../landingComponents/Landing';
@@ -88,75 +90,17 @@ export function Main() {
                 {/* TOGGLE EXPAND BUTTON --- END */}
 
                 {/* EXPANDED CONTENT --- START */}
-                {!expanded ? 
+                {!expanded && 
                 <section className="px-2 py-2 h-[90%]">
                     <h2 className="text-center text-2xl font-semibold">Welcome to the Chat Bot</h2>
 
                     <div className="bg-white mt-4 h-[93%] w-full flex flex-col-reverse overflow-y-scroll" id='chat-box'>
                         {/* EACH MESSAGE */}
-                        {loading ? 
-                        <div className="px-2 py-2">
-                            <div className="flex items-center">
-                                <img 
-                                    src={bot}
-                                    className='w-8 bg-gray-200 rounded-full p-[3px]'
-                                    alt='bot profile'
-                                    loading="lazy"
-                                />
-                                <div className="bg-gray-300 w-fit h-fit px-[12px] py-2 rounded-md ml-2">
-                                    <p>. . .</p>
-                                </div>
-                            </div>
-                        </div>
-                        :
-                        null
+                        {loading && 
+                            <Typing bot={bot} />
                         }
                         {messages.map((message, i) => (
-                            <div className="px-2 py-2" key={i}>
-                                <div className="mb-2">
-                                    <div className="flex items-center">
-                                    <img 
-                                        src={bot}
-                                        className='w-8 bg-gray-200 rounded-full p-[3px]'
-                                        alt='bot profile'
-                                        loading="lazy"
-                                    />
-                                    <div className="bg-gray-300 w-fit max-w-[90%] h-fit px-[12px] py-2 rounded-md ml-2">
-                                        <p>{message.text}</p>
-                                    </div>
-                                    </div>
-                                    {message.items ? 
-                                    <div className="flex gap-4 overflow-x-scroll mt-2 ml-2">
-                                    {message.items.map(item => {
-                                        console.log(item.thumbnailUrl)
-                                        return (
-                                        <div className="bg-gray-300 rounded-lg min-w-[200px] flex flex-col">
-                                            <img
-                                                src={item.thumbnailUrl}
-                                                className='w-full h-[112px] rounded-tr-lg rounded-tl-lg pointer-events-none bg-cover object-contain bg-white'
-                                                alt={item.title}
-                                            />
-                                            <p className="font-bold mt-2 mb-[10px] px-[12px]">{item.title}</p>
-                                            <div className="px-[12px] mb-[12px] mt-auto w-full flex">
-                                            <a 
-                                                href={item.url} 
-                                                target="__blank" 
-                                                rel='noreferrer' 
-                                                className="bg-white font-bold min-w-full rounded-lg text-center shadow hover:bg-gray-100 active:shadow-none"
-                                            >
-                                                Learn More
-                                            </a>
-                                            </div>
-                                        </div>
-                                        )
-                                    })}
-                                    </div>
-                                    :
-                                    null
-                                    }
-                                </div>
-                                <p className="text-xs text-gray-500">{message.timeSent}</p>
-                            </div>
+                            <Message i={i} bot={bot} message={message} />
                         ))}
                         
                     </div>
@@ -164,8 +108,6 @@ export function Main() {
                         Create Fake Message
                     </button>
                 </section>
-                :
-                null
                 }
                 {/* EXPANDED CONTENT --- END */}
 
