@@ -92,15 +92,24 @@ export function Main() {
                                     </div>
                                     </div>
                                     {message.items ? 
-                                    <div className="flex">
+                                    <div className="flex gap-4 mt-2 ml-2">
                                     {message.items.map(item => (
-                                        <div className="bg-gray-300 rounded-lg min-w-[200px]">
-                                                <img 
-                                                    src={item.thumbnailUrl}
-                                                    className='w-full h-[112px] rounded-tr-lg rounded-tl-lg'
-                                                />
-                                            <p className="font-bold mt-2">{item.title}</p>
-                                            <a href={item.url} target="__blank" rel='noreferrer' className="bg-white font-bold w-full mb-[12px] rounded-lg">Learn More</a>
+                                        <div className="bg-gray-300 rounded-lg min-w-[200px] flex flex-col">
+                                            <img 
+                                                src={item.thumbnailUrl}
+                                                className='w-full h-[112px] rounded-tr-lg rounded-tl-lg'
+                                            />
+                                            <p className="font-bold mt-2 mb-[10px] px-[12px]">{item.title}</p>
+                                            <div className="px-[12px] mb-[12px] mt-auto w-full flex">
+                                            <a 
+                                                href={item.url} 
+                                                target="__blank" 
+                                                rel='noreferrer' 
+                                                className="bg-white font-bold min-w-full rounded-lg text-center"
+                                            >
+                                                Learn More
+                                            </a>
+                                            </div>
                                         </div>
                                     ))}
                                     </div>
