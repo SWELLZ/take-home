@@ -83,7 +83,7 @@ export function Main() {
                 {/* EXPANDED CONTENT --- START */}
                 {!expanded ? 
                 <section className="px-2 py-2 h-[90%]">
-                    <h2 className="text-center text-lg font-semibold">Welcome to the Chat Bot</h2>
+                    <h2 className="text-center text-2xl font-semibold">Welcome to the Chat Bot</h2>
 
                     <div className="bg-white mt-4 h-[93%] w-full flex flex-col-reverse overflow-y-scroll">
                         {/* EACH MESSAGE */}
@@ -120,13 +120,14 @@ export function Main() {
                                     </div>
                                     {message.items ? 
                                     <div className="flex gap-4 mt-2 ml-2">
-                                    {message.items.map(item => (
+                                    {message.items.map(item => {
+                                        console.log(item.thumbnailUrl)
+                                        return (
                                         <div className="bg-gray-300 rounded-lg min-w-[200px] flex flex-col">
-                                            <img 
+                                            <img
                                                 src={item.thumbnailUrl}
-                                                className='w-full h-[112px] rounded-tr-lg rounded-tl-lg'
+                                                className='w-full h-[112px] rounded-tr-lg rounded-tl-lg pointer-events-none bg-cover object-contain bg-white'
                                                 alt={item.title}
-                                                loading="lazy"
                                             />
                                             <p className="font-bold mt-2 mb-[10px] px-[12px]">{item.title}</p>
                                             <div className="px-[12px] mb-[12px] mt-auto w-full flex">
@@ -134,13 +135,14 @@ export function Main() {
                                                 href={item.url} 
                                                 target="__blank" 
                                                 rel='noreferrer' 
-                                                className="bg-white font-bold min-w-full rounded-lg text-center"
+                                                className="bg-white font-bold min-w-full rounded-lg text-center shadow hover:bg-gray-100 active:shadow-none"
                                             >
                                                 Learn More
                                             </a>
                                             </div>
                                         </div>
-                                    ))}
+                                        )
+                                    })}
                                     </div>
                                     :
                                     null
