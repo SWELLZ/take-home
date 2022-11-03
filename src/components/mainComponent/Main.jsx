@@ -68,7 +68,7 @@ export function Main() {
             <About />
             <div className={expandedCSS}>
                 {unread.length > 0 ?
-                    <div className="position absolute top-2 right-2 bg-red-600 w-6 h-6 rounded-full text-white grid place-items-center">
+                    <div className="position absolute top-2 right-2 bg-red-600 w-6 h-6 rounded-full pointer-events-none text-white grid place-items-center">
                         <p>{unread.length}</p>
                     </div>
                 :
@@ -92,7 +92,7 @@ export function Main() {
                 <section className="px-2 py-2 h-[90%]">
                     <h2 className="text-center text-2xl font-semibold">Welcome to the Chat Bot</h2>
 
-                    <div className="bg-white mt-4 h-[93%] w-full flex flex-col-reverse overflow-y-scroll " id='chat-box'>
+                    <div className="bg-white mt-4 h-[93%] w-full flex flex-col-reverse overflow-y-scroll" id='chat-box'>
                         {/* EACH MESSAGE */}
                         {loading ? 
                         <div className="px-2 py-2">
@@ -121,12 +121,12 @@ export function Main() {
                                         alt='bot profile'
                                         loading="lazy"
                                     />
-                                    <div className="bg-gray-300 w-fit h-fit px-[12px] py-2 rounded-md ml-2">
+                                    <div className="bg-gray-300 w-fit max-w-[90%] h-fit px-[12px] py-2 rounded-md ml-2">
                                         <p>{message.text}</p>
                                     </div>
                                     </div>
                                     {message.items ? 
-                                    <div className="flex gap-4 mt-2 ml-2">
+                                    <div className="flex gap-4 overflow-x-scroll mt-2 ml-2">
                                     {message.items.map(item => {
                                         console.log(item.thumbnailUrl)
                                         return (
