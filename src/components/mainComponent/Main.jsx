@@ -5,121 +5,23 @@ import { Nav } from '../navComponent/Nav';
 import message from '../resources/message-icon.png';
 import close from '../resources/close.png';
 import bot from '../resources/ai.png'
-import ChatApi from '../../chat-api'
+import ChatApi from '../../chat-api';
+import { randomStrings } from "../randomStrings";
 
 
 export function Main() {
     const chatApi = new ChatApi();
-    const randomStrings = [
-        "IeYJlrpPMm",
-        "YlfZHISIFS",
-        "IibjMCLYuh",
-        "CTypOKbxAC",
-        "VnzVTLLaBN",
-        "aOZaehtgSl",
-        "COqsjRXLQm",
-        "NurjsJfkhE",
-        "TtdDJqqFRK",
-        "zNpcBbjJlG",
-        "sGRKZHGkQi",
-        "HulPahCzEZ",
-        "JGEQCyqQMn",
-        "KoRFZdnkAZ",
-        "fYwvHetHGL",
-        "RcDzNodmRv",
-        "uNtCsCEHJW",
-        "NpBeJWpHAG",
-        "rAzOHITTpd",
-        "JPBYZOJyld",
-        "LCHVqcHHuy",
-        "UjZLNRvhLp",
-        "kuBnfxOKMZ",
-        "BpAHifXOAQ",
-        "GxqjlizLDP",
-        "GivJbxYIHi",
-        "grHULfceJr",
-        "SPzFpJKLOx",
-        "PhGZZtAgwj",
-        "voIjMnaCYV",
-        "OxrEzweCHa",
-        "VFYhwCEaeC",
-        "WfEgqbSNbv",
-        "bqGikVVZms",
-        "jtyKkApUxo",
-        "oJogOpWTPX",
-        "ibckhasXmq",
-        "cfXVAZLBxK",
-        "aVyFnUPaip",
-        "GlxFNkWUMV",
-        "ExfcQfCZkA",
-        "iyFkgcfZBn",
-        "GaxunfQHXl",
-        "yeRDMAouBS",
-        "uBYVDnjHOM",
-        "ggmkkUthQp",
-        "LZcajKgYhV",
-        "afRobUNCgd",
-        "iZUNQheSAT",
-        "AArpBXhgVE",
-        "KmMRxcocUi",
-        "vjkokDrOcD",
-        "fIfHPvzrAm",
-        "egivhKfbev",
-        "QnHAEnHMnU",
-        "SDqEIZCJWn",
-        "yjyZRNJCmw",
-        "wqRARqaAWL",
-        "SDwFamDIwJ",
-        "oNtzvFhZbl",
-        "fwolHarIhv",
-        "BuGVOetZSv",
-        "kWtkbrGpYH",
-        "mBnufzuLSw",
-        "bSHfFzQrTk",
-        "gzdJnrMibk",
-        "dVtxUMMLvB",
-        "amAAZLuQPb",
-        "odcWXZhvTN",
-        "jGYopnYilm",
-        "wFxqikeNRi",
-        "PCvboKsoSY",
-        "taXDjpLAqH",
-        "DJfiPXxyau",
-        "fVKQqJCqOr",
-        "SLwMjbPplL",
-        "XPisMugaax",
-        "IZCznwSkhY",
-        "vBEwJKaKIU",
-        "UMTUkIKQfh",
-        "CYjRguUoFq",
-        "mAcAVWEuPh",
-        "PvsellfWfa",
-        "cptFhBOwlg",
-        "sVnCNHImlq",
-        "NDyCNTmvyR",
-        "lNwvGWsYdZ",
-        "LxNNSYTKzG",
-        "uYNrGAYFhe",
-        "fZLhvqyfwz",
-        "yBXtCCveXU",
-        "PDCrxKNqAJ",
-        "qRLJNjsNcp",
-        "jebvccKbLo",
-        "UVCuaWlvdv",
-        "BvYPbHNkEZ",
-        "TgyMsiuLxT",
-        "WnJgOTqYby",
-        "AzcnPiHNcE",
-        "FtaxMjHVIJ"
-    ]
-
 
     const [expanded, setExpanded] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [messages, setMessages] = useState([])
     const [unread, setUnred] = useState([]);
 
     useEffect(() => {
-        setUnred(messages)
+        if(expanded){
+            setUnred(messages)
+        }
+        setLoading(false)
     }, [messages])
 
     const handleToggle = () => {
@@ -129,18 +31,25 @@ export function Main() {
         }
     }
 
+    const chooseString = () => {
+        setTimeout(() => {
+            setMessages([{
+                text: randomStrings[Math.floor(Math.random() * randomStrings.length)],
+                timeSent: new Date().toLocaleString()
+            }, ...messages])
+        }, Math.floor(Math.random() * 5000));
+    }
+
     useEffect(() => {
         var pendingMessages = chatApi.pendingMessages.map((item) => ({...item, timeSent: new Date().toLocaleString()}))
         pendingMessages.reverse()
 
         setMessages([...messages, ...pendingMessages])
-    }, [])
+    }, []);
 
-    const handleAdd = () => {
-        setMessages([{
-            text: randomStrings[Math.floor(Math.random() * randomStrings.length)],
-            timeSent: new Date().toLocaleString()
-        }, ...messages])
+    const handleAdd = async () => {
+        setLoading(true)
+        await new Promise(chooseString);
     }
 
     const expandedCSS = expanded ? 'bottom-4 right-4 fixed bg-white w-24 h-24 rounded-full border-2' : 'w-[600px] h-[700px] bottom-4 right-4 fixed bg-white border-2 rounded-md bg-gray-200'
@@ -178,6 +87,23 @@ export function Main() {
 
                     <div className="bg-white mt-4 h-[93%] w-full flex flex-col-reverse overflow-y-scroll">
                         {/* EACH MESSAGE */}
+                        {loading ? 
+                        <div className="px-2 py-2">
+                            <div className="flex items-center">
+                                <img 
+                                    src={bot}
+                                    className='w-8 bg-gray-200 rounded-full p-[3px]'
+                                    alt='bot profile'
+                                    loading="lazy"
+                                />
+                                <div className="bg-gray-300 w-fit h-fit px-[12px] py-2 rounded-md ml-2">
+                                    <p>. . .</p>
+                                </div>
+                            </div>
+                        </div>
+                        :
+                        null
+                        }
                         {messages.map((message, i) => (
                             <div className="px-2 py-2" key={i}>
                                 <div className="mb-2">
@@ -199,6 +125,7 @@ export function Main() {
                                             <img 
                                                 src={item.thumbnailUrl}
                                                 className='w-full h-[112px] rounded-tr-lg rounded-tl-lg'
+                                                alt={item.title}
                                                 loading="lazy"
                                             />
                                             <p className="font-bold mt-2 mb-[10px] px-[12px]">{item.title}</p>
@@ -222,9 +149,10 @@ export function Main() {
                                 <p className="text-xs text-gray-500">{message.timeSent}</p>
                             </div>
                         ))}
+                        
                     </div>
-                    <button onClick={handleAdd}>
-                        Temp Add Button
+                    <button onClick={handleAdd} className='bg-white p-2 rounded-lg mx-auto text-center'>
+                        Create Fake Message
                     </button>
                 </section>
                 :
