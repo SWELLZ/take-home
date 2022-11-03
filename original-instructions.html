@@ -1,0 +1,137 @@
+<head>
+  <title>Front-end takehome assignment</title>
+  <link rel="stylesheet" href="./main.css" />
+</head>
+<body>
+  <aside>
+    <h1>GameOn Front-end takehome assignment</h1>
+    <p>Hello! Welcome to the GameOn take home assignment! ＼(＾▽＾)／</p>
+    <p>
+      The goal of this assignment is to check that you have the base skills
+      necessary to be successful on the team. Don't worry, there's no secret
+      tricks, or super special answers we're looking for. We are not looking to
+      "take off points" for random trivial things like mispelling a variable
+      name. That being said, do focus on making sure your solution is not
+      "sloppy." Make it clean, simple, and clear. We want you to succeed!
+      ٩(◕‿◕｡)۶
+    </p>
+    <p>A few general considerations before we get started:</p>
+    <ul>
+      <li>
+        This assignment should take less than two hours or so (including the
+        time to read the instructions).
+      </li>
+      <li>
+        Submit your solution within 48 hours of receiving this. Use this form to
+        submit.
+        <a href="https://forms.gle/cRcPtGYLoUDJv1qF9">
+          https://forms.gle/cRcPtGYLoUDJv1qF9
+        </a>
+      </li>
+    </ul>
+
+    <h2>Objective</h2>
+    <p>Your task is to implement a chat renderer!</p>
+    <p>
+      You will receive a simluated message object via our mock API class. Your
+      task is to take this message and render it in the
+      <code>main</code> element in this file.
+    </p>
+    <h3>Details</h3>
+    <ul>
+      <li>
+        Write all your JS code in the <code>main.js</code> file in the root
+        directory, don't worry about modularity, this project doesn't have a JS
+        bundling pipeline, so it's fine to add all your code directly in the
+        main file.
+      </li>
+      <li>
+        When a new message from our simulated bot is received, the
+        <code>handleMessageReceived</code> callback is invoked with the message
+        object.
+      </li>
+      <li>
+        Message objects adhere to the following structure:
+        <pre><code>
+{
+  text: string, // optional
+  items: [
+    {
+      url: string,
+      thumbnailUrl: string,
+      title: string,
+      cta: string
+    }
+  ], // optional
+  timestamp: number
+}
+        </code></pre>
+      </li>
+      <li>
+        For each of the messages received, render the following:
+        <ul>
+          <li>
+            If a message contains a <code>text</code> property, your program
+            should render the text within a chat bubble first.
+          </li>
+          <li>
+            If a message contains an <code>items</code> property, your program
+            should render a horizontally scrolling list of media items. Each
+            media item will always have a <code>url</code>,
+            <code>thumbnailUrl</code>, <code>title</code>, and
+            <code>cta</code> properties. Items should be laid out horizontally
+            in order. If there are more items that can fit horizontally, the
+            user should be able to scroll to the right using the browser native
+            scrolling behavior (using the scrollbar, or by pressing
+            <em>Shift</em> and scrolling with their mouse wheel).
+          </li>
+          <li>
+            Lastly, all messages will include a <code>timestamp</code> property
+            (in milliseconds) when they were sent. Your program should render
+            the time the message was received in the following format:
+            <code>MMM DD, HH:MM period</code> (e.g. <em>Feb 24, 1:47 PM</em>)
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <h2>Considerations</h2>
+    <ul>
+      <li>
+        You are not expected to validate the message structure, you can assume
+        message objects will always adhere to the spec above.
+      </li>
+      <li>
+        You can change anything on the HTML and css files, if you need a new DOM
+        structure, or anything, you can change the HTML to your heart's content.
+      </li>
+      <li>
+        You can render the messages using whatever means you want. You can use
+        plain javascript to append DOM elements into the chat area, or you can
+        use a JS framework and create a component if you're more comfortable
+        with that, or anything else. If you decide to use a framework, you can
+        use the simplest means to load it, like adding a script tag and loading
+        it from UNPKG or any other CDN. You definitely don't need to add any JS
+        bundling or tooling to this project.
+      </li>
+      <li>
+        You are encouraged to add basic animations or any other bells and
+        whistles to the rendered messages if you want.
+      </li>
+    </ul>
+
+    <h2>Reference</h2>
+    <p>
+      Here is a basic design reference for what the rendered chat can look like,
+      you are welcome to follow this spec precisely, or deviate from it and make
+      it your own, you are not required to follow this spec at all.
+    </p>
+    <img src="./reference.png" />
+    <img src="./reference-with-redlines.png" />
+  </aside>
+
+  <main>Render chat messages here!</main>
+
+  <script src="./chat-api.js"></script>
+  <script src="./main.js"></script>
+</body>
