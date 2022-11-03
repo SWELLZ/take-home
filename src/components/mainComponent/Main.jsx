@@ -8,13 +8,11 @@ import bot from '../resources/ai.png'
 import ChatApi from '../../chat-api';
 import { randomStrings } from "../randomStrings";
 
-
 export function Main() {
     const chatApi = new ChatApi();
-
     const [expanded, setExpanded] = useState(true);
     const [loading, setLoading] = useState(false);
-    const [messages, setMessages] = useState([])
+    const [messages, setMessages] = useState([]);
     const [unread, setUnred] = useState([]);
 
     useEffect(() => {
@@ -38,6 +36,7 @@ export function Main() {
                 timeSent: new Date().toLocaleString()
             }, ...messages])
         }, Math.floor(Math.random() * 5000));
+        
     }
 
     useEffect(() => {
@@ -52,7 +51,7 @@ export function Main() {
         await new Promise(chooseString);
     }
 
-    const expandedCSS = expanded ? 'bottom-4 right-4 fixed bg-white w-24 h-24 rounded-full border-2' : 'w-[600px] h-[700px] bottom-4 right-4 fixed bg-white border-2 rounded-md bg-gray-200'
+    const expandedCSS = expanded ? 'bottom-4 right-4 fixed bg-white w-24 h-24 rounded-full border-2' : 'sm:w-[600px] sm:h-[700px] h-screen w-full bottom-0 right-0 sm:bottom-4 sm:right-4 fixed bg-white border-2 sm:rounded-md bg-gray-200'
 
     return (
         <div className='relative'>
@@ -63,7 +62,7 @@ export function Main() {
                 {unread.length > 0 ?
                     <div className="position absolute top-2 right-2 bg-red-600 w-6 h-6 rounded-full text-white grid place-items-center">
                         <p>{unread.length}</p>
-                    </div> 
+                    </div>
                 :
                 null
                 }
@@ -85,7 +84,7 @@ export function Main() {
                 <section className="px-2 py-2 h-[90%]">
                     <h2 className="text-center text-2xl font-semibold">Welcome to the Chat Bot</h2>
 
-                    <div className="bg-white mt-4 h-[93%] w-full flex flex-col-reverse overflow-y-scroll">
+                    <div className="bg-white mt-4 h-[93%] w-full flex flex-col-reverse overflow-y-scroll " id='chat-box'>
                         {/* EACH MESSAGE */}
                         {loading ? 
                         <div className="px-2 py-2">
