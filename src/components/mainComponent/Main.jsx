@@ -12,19 +12,32 @@ export function Main() {
     const chatApi = new ChatApi();
     console.log(chatApi)
 
-    const [expanded, setExpanded] = useState(false);
+    const [expanded, setExpanded] = useState(true);
+    const [numOfMessages, setNumOfMessages] = useState(0)
     const [messages, setMessages] = useState([{
             message: 'lorem ipsum text here',
             timeSent: 'Jul 12, 1:12 PM'
         }])
+    const [unread, setUnred] = useState([]);
+
+    useEffect(() => {
+        setUnred(messages)
+    }, [messages])
 
     const handleToggle = () => {
         setExpanded(!expanded)
+        if(expanded){
+            setUnred([])
+        }
     }
 
     useEffect(() => {
         setMessages(chatApi.pendingMessages.map((item) => ({...item, timeSent: new Date().toLocaleString()})))
     }, [])
+
+    setTimeout(() => {
+        setMessages([...messages, {timeSent: new Date().toLocaleString(), text: 'aksdjflkasjdflj'}])
+    }, [3000])
 
     const handleAdd = () => {
         setMessages([{
@@ -41,6 +54,9 @@ export function Main() {
             <Landing />
             <About />
             <div className={expandedCSS}>
+                <div className="position absolute top-2 right-2 bg-red-600 w-6 h-6 rounded-full text-white grid place-items-center">
+                    <p>{unread.length}</p>
+                </div>
 
                 {/* TOGGLE EXPAND BUTTON --- START */}
                 {expanded ? 
