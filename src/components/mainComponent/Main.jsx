@@ -35,10 +35,6 @@ export function Main() {
         setMessages(chatApi.pendingMessages.map((item) => ({...item, timeSent: new Date().toLocaleString()})))
     }, [])
 
-    setTimeout(() => {
-        setMessages([...messages, {timeSent: new Date().toLocaleString(), text: 'aksdjflkasjdflj'}])
-    }, [3000])
-
     const handleAdd = () => {
         setMessages([{
             message: 'lorem ipsum text here',
@@ -54,9 +50,13 @@ export function Main() {
             <Landing />
             <About />
             <div className={expandedCSS}>
-                <div className="position absolute top-2 right-2 bg-red-600 w-6 h-6 rounded-full text-white grid place-items-center">
-                    <p>{unread.length}</p>
-                </div>
+                {unread.length > 0 ?
+                    <div className="position absolute top-2 right-2 bg-red-600 w-6 h-6 rounded-full text-white grid place-items-center">
+                        <p>{unread.length}</p>
+                    </div> 
+                :
+                null
+                }
 
                 {/* TOGGLE EXPAND BUTTON --- START */}
                 {expanded ? 
@@ -79,16 +79,34 @@ export function Main() {
                         {/* EACH MESSAGE */}
                         {messages.map((message, i) => (
                             <div className="px-2 py-2" key={i}>
-                                <div className="flex items-center mb-2">
+                                <div className="mb-2">
+                                    <div className="flex items-center">
                                     <img 
                                         src={bot}
                                         className='w-8 bg-gray-200 rounded-full p-[3px]'
                                         alt='bot profile'
                                         loading="lazy"
                                     />
-                                    <div className="bg-gray-300 w-fit h-fit px-4 py-2 rounded-md ml-2">
+                                    <div className="bg-gray-300 w-fit h-fit px-[12px] py-2 rounded-md ml-2">
                                         <p>{message.text}</p>
                                     </div>
+                                    </div>
+                                    {message.items ? 
+                                    <div className="flex">
+                                    {message.items.map(item => (
+                                        <div className="bg-gray-300 rounded-lg min-w-[200px]">
+                                                <img 
+                                                    src={item.thumbnailUrl}
+                                                    className='w-full h-[112px] rounded-tr-lg rounded-tl-lg'
+                                                />
+                                            <p className="font-bold mt-2">{item.title}</p>
+                                            <a href={item.url} target="__blank" rel='noreferrer' className="bg-white font-bold w-full mb-[12px] rounded-lg">Learn More</a>
+                                        </div>
+                                    ))}
+                                    </div>
+                                    :
+                                    null
+                                    }
                                 </div>
                                 <p className="text-xs text-gray-500">{message.timeSent}</p>
                             </div>
