@@ -18,7 +18,6 @@ export function Message({ i, bot, message }) {
         {message.items ? (
           <div className="flex gap-4 overflow-x-scroll mt-2 ml-2">
             {message.items.map((item) => {
-              console.log(item.thumbnailUrl);
               return (
                 <div className="bg-gray-300 rounded-lg min-w-[200px] flex flex-col">
                   <img
