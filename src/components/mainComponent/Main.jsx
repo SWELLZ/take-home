@@ -9,12 +9,16 @@ import ChatApi from '../../chat-api';
 import { randomStrings } from "../randomStrings";
 
 export function Main() {
+    //CHAT API OBJECT
     const chatApi = new ChatApi();
-    const [expanded, setExpanded] = useState(true);
-    const [loading, setLoading] = useState(false);
-    const [messages, setMessages] = useState([]);
-    const [unread, setUnred] = useState([]);
 
+    //STATE VARIABLES
+    const [expanded, setExpanded] = useState(true); //expanded variable
+    const [loading, setLoading] = useState(false); //loading/typing variable
+    const [messages, setMessages] = useState([]);//All messages
+    const [unread, setUnred] = useState([]);//All unread messages
+
+    //SETS READ/UNREAD VARIABLES
     useEffect(() => {
         if(expanded){
             setUnred(messages)
@@ -22,6 +26,7 @@ export function Main() {
         setLoading(false)
     }, [messages])
 
+    //TOGGLES EXPAND
     const handleToggle = () => {
         setExpanded(!expanded)
         if(expanded){
@@ -29,6 +34,7 @@ export function Main() {
         }
     }
 
+    //CHOOSES RANDOM MESSAGE IN MY JAVASCRIPT FILE
     const chooseString = () => {
         setTimeout(() => {
             setMessages([{
@@ -36,9 +42,9 @@ export function Main() {
                 timeSent: new Date().toLocaleString()
             }, ...messages])
         }, Math.floor(Math.random() * 5000));
-        
     }
 
+    //SETS MESSAGES USING GIVEN CHAT API
     useEffect(() => {
         var pendingMessages = chatApi.pendingMessages.map((item) => ({...item, timeSent: new Date().toLocaleString()}))
         pendingMessages.reverse()
@@ -46,11 +52,13 @@ export function Main() {
         setMessages([...messages, ...pendingMessages])
     }, []);
 
+    //ADDS NEW TEXT BY USING AN EXTERNAL FILE AND A PROMISE
     const handleAdd = async () => {
         setLoading(true)
         await new Promise(chooseString);
     }
 
+    //BUBBLE OR THE EXPANDED CHAT BOX CSS VARIABLE
     const expandedCSS = expanded ? 'bottom-4 right-4 fixed bg-white w-24 h-24 rounded-full border-2' : 'sm:w-[600px] sm:h-[700px] h-screen w-full bottom-0 right-0 sm:bottom-4 sm:right-4 fixed bg-white border-2 sm:rounded-md bg-gray-200'
 
     return (
