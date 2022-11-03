@@ -1,14 +1,14 @@
+import React, { useEffect, useState } from "react";
 import { Typing } from '../messageComponents/typing';
 import { Message } from '../messageComponents/message';
-import React, { useEffect, useState } from "react";
 import { About } from '../aboutComponent/About';
 import { Landing } from '../landingComponents/Landing';
 import { Nav } from '../navComponent/Nav';
+import { randomStrings } from "../randomStrings";
 import message from '../resources/message-icon.png';
 import close from '../resources/close.png';
 import bot from '../resources/ai.png'
 import ChatApi from '../../chat-api';
-import { randomStrings } from "../randomStrings";
 
 export function Main() {
     //CHAT API OBJECT
@@ -104,13 +104,13 @@ export function Main() {
                         ))}
                         
                     </div>
+                    
                     <button onClick={handleAdd} className='bg-white p-2 rounded-lg mx-auto text-center'>
                         Create Fake Message
                     </button>
                 </section>
                 }
                 {/* EXPANDED CONTENT --- END */}
-
             </div>
         </div>
     );
