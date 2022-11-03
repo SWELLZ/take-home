@@ -32,7 +32,9 @@ export function Main() {
     }
 
     useEffect(() => {
-        setMessages(chatApi.pendingMessages.map((item) => ({...item, timeSent: new Date().toLocaleString()})))
+        const pendingMessages = chatApi.pendingMessages.map((item) => ({...item, timeSent: new Date().toLocaleString()}));
+
+        setMessages({ ...pendingMessages,...messages})
     }, [])
 
     const handleAdd = () => {
@@ -98,6 +100,7 @@ export function Main() {
                                             <img 
                                                 src={item.thumbnailUrl}
                                                 className='w-full h-[112px] rounded-tr-lg rounded-tl-lg'
+                                                loading="lazy"
                                             />
                                             <p className="font-bold mt-2 mb-[10px] px-[12px]">{item.title}</p>
                                             <div className="px-[12px] mb-[12px] mt-auto w-full flex">
