@@ -13,11 +13,7 @@ export function Main() {
     console.log(chatApi)
 
     const [expanded, setExpanded] = useState(true);
-    const [numOfMessages, setNumOfMessages] = useState(0)
-    const [messages, setMessages] = useState([{
-            message: 'lorem ipsum text here',
-            timeSent: 'Jul 12, 1:12 PM'
-        }])
+    const [messages, setMessages] = useState([])
     const [unread, setUnred] = useState([]);
 
     useEffect(() => {
@@ -32,9 +28,10 @@ export function Main() {
     }
 
     useEffect(() => {
-        const pendingMessages = chatApi.pendingMessages.map((item) => ({...item, timeSent: new Date().toLocaleString()}));
+        var pendingMessages = chatApi.pendingMessages.map((item) => ({...item, timeSent: new Date().toLocaleString()}))
+        pendingMessages.reverse()
 
-        setMessages({ ...pendingMessages,...messages})
+        setMessages([...messages, ...pendingMessages])
     }, [])
 
     const handleAdd = () => {
@@ -124,9 +121,9 @@ export function Main() {
                             </div>
                         ))}
                     </div>
-                    <button onClick={handleAdd}>
+                    {/* <button onClick={handleAdd}>
                         Temp Add Button
-                    </button>
+                    </button> */}
                 </section>
                 :
                 null
