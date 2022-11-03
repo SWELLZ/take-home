@@ -1,6 +1,14 @@
 # Take Home Assessment
 ## [LIVE LINK](https://chatbot-ndias.netlify.app/)
 
+## User Instructions
+If you would like to run this on your machine, I have hosted it on Netlify so no downloading necessary! If you want to look at my code, you can either look here on GitHub or you can look at the zip file I sent you. If you would like to run the code on your machine, make sure to run these commands:
+`npm install`
+
+AND THEN
+
+`npm start`
+
 ## Objective
 Your task is to implement a chat renderer!
 
