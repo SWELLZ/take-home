@@ -10,7 +10,109 @@ import ChatApi from '../../chat-api'
 
 export function Main() {
     const chatApi = new ChatApi();
-    console.log(chatApi)
+    const randomStrings = [
+        "IeYJlrpPMm",
+        "YlfZHISIFS",
+        "IibjMCLYuh",
+        "CTypOKbxAC",
+        "VnzVTLLaBN",
+        "aOZaehtgSl",
+        "COqsjRXLQm",
+        "NurjsJfkhE",
+        "TtdDJqqFRK",
+        "zNpcBbjJlG",
+        "sGRKZHGkQi",
+        "HulPahCzEZ",
+        "JGEQCyqQMn",
+        "KoRFZdnkAZ",
+        "fYwvHetHGL",
+        "RcDzNodmRv",
+        "uNtCsCEHJW",
+        "NpBeJWpHAG",
+        "rAzOHITTpd",
+        "JPBYZOJyld",
+        "LCHVqcHHuy",
+        "UjZLNRvhLp",
+        "kuBnfxOKMZ",
+        "BpAHifXOAQ",
+        "GxqjlizLDP",
+        "GivJbxYIHi",
+        "grHULfceJr",
+        "SPzFpJKLOx",
+        "PhGZZtAgwj",
+        "voIjMnaCYV",
+        "OxrEzweCHa",
+        "VFYhwCEaeC",
+        "WfEgqbSNbv",
+        "bqGikVVZms",
+        "jtyKkApUxo",
+        "oJogOpWTPX",
+        "ibckhasXmq",
+        "cfXVAZLBxK",
+        "aVyFnUPaip",
+        "GlxFNkWUMV",
+        "ExfcQfCZkA",
+        "iyFkgcfZBn",
+        "GaxunfQHXl",
+        "yeRDMAouBS",
+        "uBYVDnjHOM",
+        "ggmkkUthQp",
+        "LZcajKgYhV",
+        "afRobUNCgd",
+        "iZUNQheSAT",
+        "AArpBXhgVE",
+        "KmMRxcocUi",
+        "vjkokDrOcD",
+        "fIfHPvzrAm",
+        "egivhKfbev",
+        "QnHAEnHMnU",
+        "SDqEIZCJWn",
+        "yjyZRNJCmw",
+        "wqRARqaAWL",
+        "SDwFamDIwJ",
+        "oNtzvFhZbl",
+        "fwolHarIhv",
+        "BuGVOetZSv",
+        "kWtkbrGpYH",
+        "mBnufzuLSw",
+        "bSHfFzQrTk",
+        "gzdJnrMibk",
+        "dVtxUMMLvB",
+        "amAAZLuQPb",
+        "odcWXZhvTN",
+        "jGYopnYilm",
+        "wFxqikeNRi",
+        "PCvboKsoSY",
+        "taXDjpLAqH",
+        "DJfiPXxyau",
+        "fVKQqJCqOr",
+        "SLwMjbPplL",
+        "XPisMugaax",
+        "IZCznwSkhY",
+        "vBEwJKaKIU",
+        "UMTUkIKQfh",
+        "CYjRguUoFq",
+        "mAcAVWEuPh",
+        "PvsellfWfa",
+        "cptFhBOwlg",
+        "sVnCNHImlq",
+        "NDyCNTmvyR",
+        "lNwvGWsYdZ",
+        "LxNNSYTKzG",
+        "uYNrGAYFhe",
+        "fZLhvqyfwz",
+        "yBXtCCveXU",
+        "PDCrxKNqAJ",
+        "qRLJNjsNcp",
+        "jebvccKbLo",
+        "UVCuaWlvdv",
+        "BvYPbHNkEZ",
+        "TgyMsiuLxT",
+        "WnJgOTqYby",
+        "AzcnPiHNcE",
+        "FtaxMjHVIJ"
+    ]
+
 
     const [expanded, setExpanded] = useState(true);
     const [messages, setMessages] = useState([])
@@ -36,7 +138,7 @@ export function Main() {
 
     const handleAdd = () => {
         setMessages([{
-            message: 'lorem ipsum text here',
+            text: randomStrings[Math.floor(Math.random() * randomStrings.length)],
             timeSent: new Date().toLocaleString()
         }, ...messages])
     }
@@ -121,9 +223,9 @@ export function Main() {
                             </div>
                         ))}
                     </div>
-                    {/* <button onClick={handleAdd}>
+                    <button onClick={handleAdd}>
                         Temp Add Button
-                    </button> */}
+                    </button>
                 </section>
                 :
                 null
