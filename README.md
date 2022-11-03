@@ -16,6 +16,8 @@ Your task is to implement a chat renderer!
 You will receive a simluated message object via our mock API class. Your task is to take this message and render it in the main element in this file.
 
 ## Completion
+This is a scaleable, mobile friendly, and cleanly designed chat bot that can technically be added to any site! Even though this was a simple challenge, I felt the need to really flex my skills by creating a scaleable chat bot rather than one that only sent the three messages. This bot has a demo test button to create new bot messages. I really hope you enjoy and I hope this solution satisfies! 
+
 The instructions mentioned I was allowed to use a framework so I am using React and TailwindCSS to complete this project. The over achiever in me created a fake landing page with a fixed positioned chat box. Initially, you will have 3 unread messages which is shown with a number on the top right of the chat bubble.
 
 <img src="./src/components/resources/chatbubble-demo.png" width="200" height="200" style="display:inline;" />
