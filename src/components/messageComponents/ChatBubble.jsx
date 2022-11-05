@@ -129,19 +129,6 @@ export function ChatBubble() {
     await new Promise(botResponse());
   };
 
-  //CHOOSES RANDOM MESSAGE IN MY JAVASCRIPT FILE
-  const chooseString = () => {
-    setTimeout(() => {
-      setMessages([
-        {
-          text: randomStrings[Math.floor(Math.random() * randomStrings.length)],
-          timeSent: new Date().toLocaleString(),
-        },
-        ...messages,
-      ]);
-    }, Math.floor(Math.random() * 5000));
-  };
-
   //SETS MESSAGES USING GIVEN CHAT API
   useEffect(() => {
     var pendingMessages = chatApi.pendingMessages.map((item) => ({
@@ -153,16 +140,10 @@ export function ChatBubble() {
     setMessages([...messages, ...pendingMessages]);
   }, []);
 
-  //ADDS NEW TEXT BY USING AN EXTERNAL FILE AND A PROMISE
-  const handleAdd = async () => {
-    setLoading(true);
-    await new Promise(chooseString);
-  };
-
   //BUBBLE OR THE EXPANDED CHAT BOX CSS VARIABLE
   const expandedCSS = expanded
     ? "bottom-4 right-4 fixed bg-white w-24 h-24 rounded-full border-2"
-    : "sm:w-[600px] sm:h-[700px] h-screen w-full bottom-0 right-0 sm:bottom-4 sm:right-4 fixed bg-white border-2 sm:rounded-md bg-gray-200";
+    : "sm:w-[600px] sm:h-[700px] h-full w-full bottom-0 right-0 sm:bottom-4 sm:right-4 fixed bg-white border-2 sm:rounded-md bg-gray-200";
 
   return (
     <div className={expandedCSS}>
@@ -208,23 +189,21 @@ export function ChatBubble() {
               <Message i={i} bot={bot} user={user} message={message} />
             ))}
           </div>
-          <div className="flex items-center mt-1">
-            <form onSubmit={handleSendMessage}>
+          <div className="flex mt-4 items-center sm:mt-1">
+            <form className="flex gap-2 w-full justify-between" onSubmit={handleSendMessage}>
               <input
                 type="text"
+                className="rounded-md ml-4 border border-transparent outline-none px-2 py-1 w-1/2 shadow focus:border-blue-500 focus:border"
+                placeholder="Enter command (try 'help')... "
                 onChange={(e) => setUserCommand(e.target.value)}
                 value={userCommand}
                 required
               />
-              <button type="submit">Send</button>
+              <button 
+                type="submit"
+                className="bg-blue-500 mr-4 text-white px-6 rounded-full hover:bg-blue-600 shadow"
+              >Send</button>
             </form>
-            <button
-              onClick={handleAdd}
-              type="button"
-              className="bg-white p-1 rounded-lg mx-auto text-center"
-            >
-              Create Fake Message
-            </button>
           </div>
         </section>
       )}
