@@ -6,7 +6,7 @@ import ChatApi from "../../chat-api";
 import { Typing } from "./Typing";
 import close from "../resources/close.png";
 import bot from "../resources/ai.png";
-import user from '../resources/user-png.png'
+import user from "../resources/user-png.png";
 
 export function ChatBubble() {
   //STATE VARIABLES
@@ -14,53 +14,54 @@ export function ChatBubble() {
   const [loading, setLoading] = useState(false); //loading/typing variable
   const [messages, setMessages] = useState([]); //All messages
   const [unread, setUnred] = useState([]); //All unread messages
-  const [userCommand, setUserCommand] = useState('');
+  const [userCommand, setUserCommand] = useState("");
 
   const commands = {
     help: `Here is a list of commands!\n
             'author' --- Gives you info on the creator of this bot\n
             'info' --- Gives you info on this site\n
             'dadJoke' --- Tells you a random dad joke!\n
-            'flex' --- Generates a random message`,
+            'flex' --- Generates a random message generated from Random.org`,
     author: `Nehemiah Dias made this site!\n
             You can find his website at the bottom of this page. He is the best coder in the world!\n
             Visit his site and make contact!`,
     info: `This site is 100% fake and serves no purpose other than being a place for me to exist! (Me as in the bot)`,
-    dadJoke: ["What do you call a factory that makes okay products? A satisfactory.",
-        "Dear Math, grow up and solve your own problems.",
-        "What did the janitor say when he jumped out of the closet? Supplies!",
-        "Have you heard about the chocolate record player? It sounds pretty sweet.",
-        "What did the ocean say to the beach? Nothing, it just waved.",
-        "Why do seagulls fly over the ocean? Because if they flew over the bay, we'd call them bagels.",
-        "I only know 25 letters of the alphabet. I don't know y.",
-        "How does the moon cut his hair? Eclipse it.",
-        "What did one wall say to the other? I'll meet you at the corner.",
-        "What did the zero say to the eight? That belt looks good on you.",
-        "A skeleton walks into a bar and says, 'Hey, bartender. I'll have one beer and a mop.'",
-        "Where do fruits go on vacation? Pear-is!",
-        "I asked my dog what's two minus two. He said nothing.",
-        "What did Baby Corn say to Mama Corn? Where's Pop Corn?",
-        "What's the best thing about Switzerland? I don't know, but the flag is a big plus.",
-        "What does a sprinter eat before a race? Nothing, they fast!",
-        "Where do you learn to make a banana split? Sundae school.",
-        "What has more letters than the alphabet? The post office!",
-        "Dad, did you get a haircut? No, I got them all cut!",
-        "What do you call a poor Santa Claus? St. Nickel-less.",
-        "I got carded at a liquor store, and my Blockbuster card accidentally fell out. The cashier said never mind.",
-        "Where do boats go when they're sick? To the boat doc.",
-        "I don't trust those trees. They seem kind of shady.",
-        "My wife is really mad at the fact that I have no sense of direction. So I packed up my stuff and right!",
-        "How do you get a squirrel to like you? Act like a nut.",
-        "Why don't eggs tell jokes? They'd crack each other up.",
-        "I don't trust stairs. They're always up to something.",
-        "What do you call someone with no body and no nose? Nobody knows.",
-        "Did you hear the rumor about butter? Well, I'm not going to spread it!",
-        "Why couldn't the bicycle stand up by itself? It was two tired.",
-        "What did one hat say to the other? Stay here! I'm going on ahead.",
-        "Why did Billy get fired from the banana factory? He kept throwing away the bent ones."
+    dadJoke: [
+      "What do you call a factory that makes okay products? A satisfactory.",
+      "Dear Math, grow up and solve your own problems.",
+      "What did the janitor say when he jumped out of the closet? Supplies!",
+      "Have you heard about the chocolate record player? It sounds pretty sweet.",
+      "What did the ocean say to the beach? Nothing, it just waved.",
+      "Why do seagulls fly over the ocean? Because if they flew over the bay, we'd call them bagels.",
+      "I only know 25 letters of the alphabet. I don't know y.",
+      "How does the moon cut his hair? Eclipse it.",
+      "What did one wall say to the other? I'll meet you at the corner.",
+      "What did the zero say to the eight? That belt looks good on you.",
+      "A skeleton walks into a bar and says, 'Hey, bartender. I'll have one beer and a mop.'",
+      "Where do fruits go on vacation? Pear-is!",
+      "I asked my dog what's two minus two. He said nothing.",
+      "What did Baby Corn say to Mama Corn? Where's Pop Corn?",
+      "What's the best thing about Switzerland? I don't know, but the flag is a big plus.",
+      "What does a sprinter eat before a race? Nothing, they fast!",
+      "Where do you learn to make a banana split? Sundae school.",
+      "What has more letters than the alphabet? The post office!",
+      "Dad, did you get a haircut? No, I got them all cut!",
+      "What do you call a poor Santa Claus? St. Nickel-less.",
+      "I got carded at a liquor store, and my Blockbuster card accidentally fell out. The cashier said never mind.",
+      "Where do boats go when they're sick? To the boat doc.",
+      "I don't trust those trees. They seem kind of shady.",
+      "My wife is really mad at the fact that I have no sense of direction. So I packed up my stuff and right!",
+      "How do you get a squirrel to like you? Act like a nut.",
+      "Why don't eggs tell jokes? They'd crack each other up.",
+      "I don't trust stairs. They're always up to something.",
+      "What do you call someone with no body and no nose? Nobody knows.",
+      "Did you hear the rumor about butter? Well, I'm not going to spread it!",
+      "Why couldn't the bicycle stand up by itself? It was two tired.",
+      "What did one hat say to the other? Stay here! I'm going on ahead.",
+      "Why did Billy get fired from the banana factory? He kept throwing away the bent ones.",
     ],
-    flex: 'TEMP'
-  }
+    flex: "",
+  };
 
   //CHAT API OBJECT
   const chatApi = new ChatApi();
@@ -81,24 +82,52 @@ export function ChatBubble() {
     }
   };
 
-  const botResponse = (inputtedCommand) => {
-    if (Object.keys(commands).includes(userCommand)) {
-        console.log(commands[userCommand]);
-    }
-  }
-
-  const handleSendMessage = e => {
-    e.preventDefault();
-    setMessages([
+  const botResponse = () => {
+    setTimeout(() => {
+      let botResponse = "";
+      if (Object.keys(commands).includes(userCommand)) {
+        if (userCommand === "dadJoke") {
+          botResponse =
+            commands[userCommand][
+              Math.floor(Math.random() * commands[userCommand].length)
+            ];
+        } else if (userCommand === 'flex') {
+            botResponse = randomStrings[Math.floor(Math.random() * randomStrings.length)]
+        } else {
+          botResponse = commands[userCommand];
+        }
+      } else {
+        botResponse = "That command doesn't exist :(\nTry typing 'help'";
+      }
+      setMessages([
         {
-            text: userCommand,
-            timeSent: new Date().toLocaleString(),
-            sentByUser: true
+          text: botResponse,
+          timeSent: new Date().toLocaleString(),
         },
-        ...messages
-    ])
-    setUserCommand('')
-  }
+        {
+          text: userCommand,
+          timeSent: new Date().toLocaleString(),
+          sentByUser: true,
+        },
+        ...messages,
+      ]);
+    }, [Math.random() * 5000]);
+  };
+
+  const handleSendMessage = async (e) => {
+    e.preventDefault();
+    await setMessages([
+      {
+        text: userCommand,
+        timeSent: new Date().toLocaleString(),
+        sentByUser: true,
+      },
+      ...messages,
+    ]);
+    setUserCommand("");
+    setLoading(true);
+    await new Promise(botResponse());
+  };
 
   //CHOOSES RANDOM MESSAGE IN MY JAVASCRIPT FILE
   const chooseString = () => {
@@ -181,23 +210,21 @@ export function ChatBubble() {
           </div>
           <div className="flex items-center mt-1">
             <form onSubmit={handleSendMessage}>
-                <input 
-                    type='text'
-                    onChange={e => setUserCommand(e.target.value)}
-                    value={userCommand}
-                    required
-                />
-                <button
-                    type='submit'
-                >Send</button>
+              <input
+                type="text"
+                onChange={(e) => setUserCommand(e.target.value)}
+                value={userCommand}
+                required
+              />
+              <button type="submit">Send</button>
             </form>
-          <button
-            onClick={handleAdd}
-            type='button'
-            className="bg-white p-1 rounded-lg mx-auto text-center"
-          >
-            Create Fake Message
-          </button>
+            <button
+              onClick={handleAdd}
+              type="button"
+              className="bg-white p-1 rounded-lg mx-auto text-center"
+            >
+              Create Fake Message
+            </button>
           </div>
         </section>
       )}

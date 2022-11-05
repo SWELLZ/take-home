@@ -1,4 +1,4 @@
-import { Item } from './Item';
+import { Item } from "./Item";
 import React from "react";
 
 export function Message({ i, bot, user, message }) {
@@ -32,15 +32,17 @@ export function Message({ i, bot, user, message }) {
                 loading="lazy"
               />
               <div className="bg-gray-300 w-fit max-w-[90%] h-fit px-[12px] py-2 rounded-md ml-2">
-                <p>{message.text}</p>
+                <p>
+                  {message.text.split("\n").map((i) => (
+                    <span className="block">{i}</span>
+                  ))}
+                </p>
               </div>
             </div>
             {message.items ? (
               <div className="flex gap-4 overflow-x-scroll mt-2 ml-2">
                 {message.items.map((item) => {
-                  return (
-                    <Item item={item} />
-                  );
+                  return <Item item={item} />;
                 })}
               </div>
             ) : null}
