@@ -1,3 +1,4 @@
+import { Item } from './Item';
 import React from "react";
 
 export function Message({ i, bot, user, message }) {
@@ -17,34 +18,6 @@ export function Message({ i, bot, user, message }) {
                 loading="lazy"
               />
             </div>
-            {message.items ? (
-              <div className="flex gap-4 overflow-x-scroll mt-2 ml-2">
-                {message.items.map((item) => {
-                  return (
-                    <div className="bg-gray-300 rounded-lg min-w-[200px] flex flex-col">
-                      <img
-                        src={item.thumbnailUrl}
-                        className="w-full h-[112px] rounded-tr-lg rounded-tl-lg pointer-events-none bg-cover object-contain bg-white"
-                        alt={item.title}
-                      />
-                      <p className="font-bold mt-2 mb-[10px] px-[12px]">
-                        {item.title}
-                      </p>
-                      <div className="px-[12px] mb-[12px] mt-auto w-full flex">
-                        <a
-                          href={item.url}
-                          target="__blank"
-                          rel="noreferrer"
-                          className="bg-white font-bold min-w-full rounded-lg text-center shadow hover:bg-gray-100 active:shadow-none"
-                        >
-                          {item.cta}
-                        </a>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            ) : null}
           </div>
           <p className="text-xs text-gray-500">{message.timeSent}</p>
         </div>
@@ -66,26 +39,7 @@ export function Message({ i, bot, user, message }) {
               <div className="flex gap-4 overflow-x-scroll mt-2 ml-2">
                 {message.items.map((item) => {
                   return (
-                    <div className="bg-gray-300 rounded-lg min-w-[200px] flex flex-col">
-                      <img
-                        src={item.thumbnailUrl}
-                        className="w-full h-[112px] rounded-tr-lg rounded-tl-lg pointer-events-none bg-cover object-contain bg-white"
-                        alt={item.title}
-                      />
-                      <p className="font-bold mt-2 mb-[10px] px-[12px]">
-                        {item.title}
-                      </p>
-                      <div className="px-[12px] mb-[12px] mt-auto w-full flex">
-                        <a
-                          href={item.url}
-                          target="__blank"
-                          rel="noreferrer"
-                          className="bg-white font-bold min-w-full rounded-lg text-center shadow hover:bg-gray-100 active:shadow-none"
-                        >
-                          {item.cta}
-                        </a>
-                      </div>
-                    </div>
+                    <Item item={item} />
                   );
                 })}
               </div>
