@@ -35,7 +35,7 @@ export function Message({ i, bot, message }) {
                       rel="noreferrer"
                       className="bg-white font-bold min-w-full rounded-lg text-center shadow hover:bg-gray-100 active:shadow-none"
                     >
-                      Learn More
+                      {item.cta}
                     </a>
                   </div>
                 </div>
