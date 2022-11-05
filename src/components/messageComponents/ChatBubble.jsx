@@ -14,8 +14,9 @@ export function ChatBubble() {
   const [loading, setLoading] = useState(false); //loading/typing variable
   const [messages, setMessages] = useState([]); //All messages
   const [unread, setUnred] = useState([]); //All unread messages
-  const [userCommand, setUserCommand] = useState("");
+  const [userCommand, setUserCommand] = useState(""); //User inputted command
 
+  //OBJECT OF ALL COMMANDS
   const commands = {
     help: `Here is a list of commands!\n
             'author' --- Gives you info on the creator of this bot\n
@@ -82,31 +83,42 @@ export function ChatBubble() {
     }
   };
 
-  const botResponse = () => {
+  //DETERMINES THE BOTS RESPONSE BASED ON INPUT
+  const botResponse = (time) => {
     setTimeout(() => {
+      //Randomizes time to generate message
       let botResponse = "";
+
+      //loops through keys of known commands to check if user entered a command
       if (Object.keys(commands).includes(userCommand)) {
         if (userCommand === "dadJoke") {
+          //Handles dad joke command
           botResponse =
             commands[userCommand][
               Math.floor(Math.random() * commands[userCommand].length)
             ];
-        } else if (userCommand === 'flex') {
-            botResponse = randomStrings[Math.floor(Math.random() * randomStrings.length)]
+        } else if (userCommand === "flex") {
+          //Handles flex command
+          botResponse =
+            randomStrings[Math.floor(Math.random() * randomStrings.length)];
         } else {
+          //Returns corresponding value to the inputted key
           botResponse = commands[userCommand];
         }
       } else {
+        //If the command doesn't exist
         botResponse = "That command doesn't exist :(\nTry typing 'help'";
       }
       setMessages([
+        //BOTS RESPONSE
         {
           text: botResponse,
           timeSent: new Date().toLocaleString(),
         },
+        //USERS MESSAGE
         {
           text: userCommand,
-          timeSent: new Date().toLocaleString(),
+          timeSent: time,
           sentByUser: true,
         },
         ...messages,
@@ -114,19 +126,27 @@ export function ChatBubble() {
     }, [Math.random() * 5000]);
   };
 
+  //SENDS MESSAGE FROM USER AND USES THAT MESSAGE TO GET A BOT RESPONSE
   const handleSendMessage = async (e) => {
     e.preventDefault();
+
+    //sets current time to a variable
+    let time = new Date().toLocaleString();
+
+    //appends users message to messages
     await setMessages([
       {
         text: userCommand,
-        timeSent: new Date().toLocaleString(),
+        timeSent: time,
         sentByUser: true,
       },
       ...messages,
     ]);
-    setUserCommand("");
+    setUserCommand(""); //resets input field
+
+    //HANDLES SIMULATED THINKING
     setLoading(true);
-    await new Promise(botResponse());
+    await new Promise(botResponse(time));
   };
 
   //SETS MESSAGES USING GIVEN CHAT API
@@ -190,7 +210,10 @@ export function ChatBubble() {
             ))}
           </div>
           <div className="flex mt-4 items-center sm:mt-1">
-            <form className="flex gap-2 w-full justify-between" onSubmit={handleSendMessage}>
+            <form
+              className="flex gap-2 w-full justify-between"
+              onSubmit={handleSendMessage}
+            >
               <input
                 type="text"
                 className="rounded-md ml-4 border border-transparent outline-none px-2 py-1 w-1/2 shadow focus:border-blue-500 focus:border"
@@ -199,10 +222,12 @@ export function ChatBubble() {
                 value={userCommand}
                 required
               />
-              <button 
+              <button
                 type="submit"
                 className="bg-blue-500 mr-4 text-white px-6 rounded-full hover:bg-blue-600 shadow"
-              >Send</button>
+              >
+                Send
+              </button>
             </form>
           </div>
         </section>
