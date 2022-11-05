@@ -6,6 +6,7 @@ import ChatApi from "../../chat-api";
 import { Typing } from "./Typing";
 import close from "../resources/close.png";
 import bot from "../resources/ai.png";
+import user from '../resources/user-png.png'
 
 export function ChatBubble() {
   //STATE VARIABLES
@@ -80,11 +81,23 @@ export function ChatBubble() {
     }
   };
 
-  const handleSendMessage = e => {
-    e.preventDefault();
+  const botResponse = (inputtedCommand) => {
     if (Object.keys(commands).includes(userCommand)) {
         console.log(commands[userCommand]);
     }
+  }
+
+  const handleSendMessage = e => {
+    e.preventDefault();
+    setMessages([
+        {
+            text: userCommand,
+            timeSent: new Date().toLocaleString(),
+            sentByUser: true
+        },
+        ...messages
+    ])
+    setUserCommand('')
   }
 
   //CHOOSES RANDOM MESSAGE IN MY JAVASCRIPT FILE
@@ -163,7 +176,7 @@ export function ChatBubble() {
             {/* EACH MESSAGE */}
             {loading && <Typing bot={bot} />}
             {messages.map((message, i) => (
-              <Message i={i} bot={bot} message={message} />
+              <Message i={i} bot={bot} user={user} message={message} />
             ))}
           </div>
           <div className="flex items-center mt-1">
@@ -172,6 +185,7 @@ export function ChatBubble() {
                     type='text'
                     onChange={e => setUserCommand(e.target.value)}
                     value={userCommand}
+                    required
                 />
                 <button
                     type='submit'
