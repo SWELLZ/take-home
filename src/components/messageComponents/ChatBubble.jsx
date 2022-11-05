@@ -73,6 +73,7 @@ export function ChatBubble() {
       setUnred(messages);
     }
     setLoading(false);
+    // eslint-disable-next-line
   }, [messages]);
 
   //TOGGLES EXPAND
@@ -158,6 +159,7 @@ export function ChatBubble() {
     pendingMessages.reverse();
 
     setMessages([...messages, ...pendingMessages]);
+    // eslint-disable-next-line
   }, []);
 
   //BUBBLE OR THE EXPANDED CHAT BOX CSS VARIABLE
@@ -200,7 +202,7 @@ export function ChatBubble() {
           </h2>
 
           <div
-            className="bg-white mt-4 h-[93%] w-full flex flex-col-reverse overflow-y-scroll"
+            className="bg-white mt-4 h-[90%] w-full flex flex-col-reverse overflow-y-scroll"
             id="chat-box"
           >
             {/* EACH MESSAGE */}
@@ -209,22 +211,22 @@ export function ChatBubble() {
               <Message i={i} bot={bot} user={user} message={message} />
             ))}
           </div>
-          <div className="flex mt-4 items-center sm:mt-1">
+          <div className="flex items-center h-[10%]">
             <form
-              className="flex gap-2 w-full justify-between"
+              className="flex gap-2 w-full justify-between items-center"
               onSubmit={handleSendMessage}
             >
               <input
                 type="text"
                 className="rounded-md ml-4 border border-transparent outline-none px-2 py-1 w-1/2 shadow focus:border-blue-500 focus:border"
-                placeholder="Enter command (try 'help')... "
+                placeholder="Command (try 'help')... "
                 onChange={(e) => setUserCommand(e.target.value)}
                 value={userCommand}
                 required
               />
               <button
                 type="submit"
-                className="bg-blue-500 mr-4 text-white px-6 rounded-full hover:bg-blue-600 shadow"
+                className="bg-blue-500 py-1 mr-4 text-white px-6 rounded-full hover:bg-blue-600 shadow"
               >
                 Send
               </button>
