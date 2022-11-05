@@ -26,6 +26,6 @@ When you view the messages, they will be marked as read and that number will dis
 
 <img src="./src/components/resources/chatbox-demo.png" width="200" height="200" style="display:inline;" />
 
-I also added a button that generates a fake message from the bot which is picked randomly from a list of around 100 strings courtesy of Random.org. When you click the button, it will return a JS Promise which calls the function that chooses the random string in a random amount of time, the chat box will have three dots to signify that the bot is thinking.
+I also added an input field so the user can enter a command which the bot will respond to. When you click send, it will return a JS Promise which calls the function that responds to your request in a random amount of time, the chat box will have three dots to signify that the bot is thinking.
 
 <img src="./src/components/resources/thinking-demo.png" width="200" height="200" style="display:inline;" />
