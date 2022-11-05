@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Message } from "./Message";
+import { Message } from "./Message.jsx";
 import { randomStrings } from "../randomStrings";
 import message from "../resources/message-icon.png";
 import ChatApi from "../../chat-api";
