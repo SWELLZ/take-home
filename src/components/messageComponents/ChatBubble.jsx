@@ -3,10 +3,10 @@ import { Message } from "./message";
 import { randomStrings } from "../randomStrings";
 import message from "../resources/message-icon.png";
 import ChatApi from "../../chat-api";
-import { Typing } from "./Typing";
 import close from "../resources/close.png";
 import bot from "../resources/ai.png";
 import user from "../resources/user-png.png";
+import { Typing } from "./typing";
 
 export function ChatBubble() {
   //STATE VARIABLES
