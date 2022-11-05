@@ -9,6 +9,7 @@ import message from '../resources/message-icon.png';
 import close from '../resources/close.png';
 import bot from '../resources/ai.png'
 import ChatApi from '../../chat-api';
+import Footer from "../footerComponent/Footer";
 
 export function Main() {
     //CHAT API OBJECT
@@ -112,6 +113,7 @@ export function Main() {
                 }
                 {/* EXPANDED CONTENT --- END */}
             </div>
+            <Footer />
         </div>
     );
 }
